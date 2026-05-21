@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insighters - Agencia</title>
+
+  <style>
+    :root {
+      --primary: #000728;      /* azul tipo Fenomenus */
+      --primary-soft: #a938e8; /* violeta tipo Brainstorming */
+      --dark: #050608;
+      --dark-soft: #10131a;
+      --light: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --bg-gradient: linear-gradient(135deg, #f3f6ff 0%, #e8f0ff 40%, #fdfbff 100%);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.16);
+      --shadow-small: 0 8px 20px rgba(15, 23, 42, 0.12);
+      --max-width: 1140px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #f5f5f7;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Layout base */
+
+    .page {
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section {
+      padding: 64px 16px;
+    }
+
+    .section.dark {
+      background: var(--dark);
+      color: #f9fafb;
+    }
+
+    .section.dark-soft {
+      background: var(--dark-soft);
+      color: #f9fafb;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.1rem;
+      margin-bottom: 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      max-width: 620px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 0.98rem;
+    }
+
+    .section.dark .section-subtitle,
+    .section.dark-soft .section-subtitle {
+      color: #9ca3af;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(243, 244, 246, 0.9);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .nav-logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 10% 0%, var(--primary-soft), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      position: relative;
+      color: #000728;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      transition: width 0.22s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 10px 20px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, var(--primary-soft), var(--primary));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.92rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-small);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5);
+      opacity: 0.95;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+      margin-bottom: 16px;
+    }
+
+    .hero-text {
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 24px;
+      font-size: 0.98rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary-soft), var(--primary));
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-small);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, opacity 0.16s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.5);
+      opacity: 0.95;
+    }
+
+    .btn-ghost {
+      padding: 11px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(255, 255, 255, 0.6);
+      color: #111827;
+      cursor: pointer;
+      font-size: 0.94rem;
+      font-weight: 500;
+      transition: background 0.16s ease, border-color 0.16s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(148, 163, 184, 1);
+    }
+
+    .hero-meta {
+      font-size: 0.84rem;
+      color: #6b7280;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .hero-meta span strong {
+      color: #111827;
+    }
+
+    .hero-video {
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.8), rgba(99, 102, 241, 0.5));
+      border-radius: var(--radius-lg);
+      padding: 10px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .hero-video-inner {
+      border-radius: calc(var(--radius-lg) - 6px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-video img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .hero-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .hero-play-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      border: 3px solid rgba(255, 255, 255, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      background: rgba(15, 23, 42, 0.25);
+    }
+
+    .hero-play-icon {
+      width: 0;
+      height: 0;
+      border-left: 16px solid #fff;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 3px;
+    }
+
+    /* PROBLEMAS (sección azul) */
+
+    .problems {
+      background: #000728;
+      color: #eef2ff;
+    }
+
+    .problems-title {
+      font-size: 2rem;
+      margin-bottom: 32px;
+      text-align: center;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .problem-item {
+      text-align: center;
+      font-size: 0.84rem;
+      color: #e5e7eb;
+    }
+
+    .problem-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 10px;
+      font-size: 1.4rem;
+      background: rgba(15, 23, 42, 0.35);
+    }
+
+    /* PRE-CHECKLIST SECTION */
+
+    .ready-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .checklist-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 24px 26px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .checklist-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(129, 140, 248, 0.12);
+      color: #4338ca;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--primary-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--primary-soft);
+      font-size: 0.8rem;
+    }
+
+    .checklist-bg-shape {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.52), transparent);
+      bottom: -80px;
+      right: -40px;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    /* SERVICIOS (cards tipo Fenomenus) */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .service-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: #111827;
+      color: #f9fafb;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      isolation: isolate;
+      box-shadow: var(--shadow-small);
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 60%);
+      z-index: -1;
+    }
+
+    .service-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .service-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 0.86rem;
+      color: #d1d5db;
+      max-width: 90%;
+    }
+
+    .service-index {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .services-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* METODOLOGÍA / FUNNEL */
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .step-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .step-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .step-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .funnel-card {
+      border-radius: var(--radius-lg);
+      background: #f9fafb;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-small);
+      font-size: 0.85rem;
+    }
+
+    .funnel-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .funnel-row:last-child {
+      border-bottom: none;
+    }
+
+    .funnel-label {
+      font-weight: 600;
+      font-size: 0.86rem;
+    }
+
+    .funnel-channels {
+      color: #6b7280;
+      text-align: right;
+      max-width: 60%;
+    }
+
+    /* PROYECTOS DESTACADOS */
+
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #050814;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(55, 65, 81, 0.7);
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+    }
+
+    .project-media {
+      height: 160px;
+      background: radial-gradient(circle at 20% 0, #1f2937, #020617);
+    }
+
+    .project-body {
+      padding: 14px 16px 18px;
+      font-size: 0.86rem;
+    }
+
+    .project-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .project-type {
+      font-size: 0.76rem;
+      color: #60a5fa;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .project-desc {
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .project-meta {
+      font-size: 0.78rem;
+      color: #6b7280;
+    }
+
+    /* CLIENTES LOGOS */
+
+    .clients-strip {
+      margin-top: 28px;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .client-logo {
+      width: 120px;
+      height: 60px;
+      border-radius: 16px;
+      border: 1px solid #111827;
+      background: radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.24), transparent),
+                  #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    /* TESTIMONIOS */
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .testimonial-video {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: radial-gradient(circle at 20% 0, #1f2937, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-size: 0.8rem;
+      position: relative;
+    }
+
+    .testimonial-card {
+      border-radius: var(--radius-lg);
+      background: #f9fafb;
+      color: #111827;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .testimonial-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 0.97rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .testimonial-text {
+      font-size: 0.86rem;
+      color: #4b5563;
+    }
+
+    /* CTA ECOSISTEMA */
+
+    .cta-ecosystem {
+      text-align: center;
+    }
+
+    .cta-ecosystem p {
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 22px;
+      font-size: 0.95rem;
+    }
+
+    /* CONTACTO + FOOTER */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .contact-card {
+      background: #0b0e16;
+      border-radius: var(--radius-lg);
+      padding: 26px 24px;
+      color: #f9fafb;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-card h3 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .contact-card p {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.86rem;
+    }
+
+    .contact-label {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .contact-input, .contact-select, .contact-textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #374151;
+      background: #020617;
+      color: #f9fafb;
+      padding: 9px 10px;
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    .contact-input:focus,
+    .contact-select:focus,
+    .contact-textarea:focus {
+      border-color: var(--primary-soft);
+    }
+
+    .contact-textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .partners {
+      font-size: 0.82rem;
+      color: #9ca3af;
+    }
+
+    .partners-logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .partner-pill {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      font-size: 0.78rem;
+    }
+
+    footer {
+      background: #050608;
+      color: #9ca3af;
+      font-size: 0.82rem;
+      padding: 36px 16px 18px;
+    }
+
+    .footer-grid {
+      max-width: var(--max-width);
+      margin: 0 auto 18px;
+      display: grid;
+      grid-template-columns: 2fr 1.1fr 1.1fr 1.2fr;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 10% 0, var(--primary-soft), var(--primary));
+    }
+
+    .footer-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 8px;
+    }
+
+    .footer-link {
+      display: block;
+      margin-bottom: 4px;
+      color: #9ca3af;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .social-pill {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+    }
+
+    .footer-bottom {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      border-top: 1px solid #111827;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .ready-grid,
+      .services-grid,
+      .steps-grid,
+      .projects-grid,
+      .testimonials-grid,
+      .contact-grid,
+      .footer-grid,
+      .problems-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none; /* para mantener simple el boceto en mobile */
+      }
+
+      .section {
+        padding: 48px 16px;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+
+      .hero-grid {
+        gap: 28px;
+      }
+
+      .problems-grid {
+        gap: 18px;
+      }
+
+      .services-grid {
+        gap: 16px;
+      }
+
+      .projects-grid {
+        gap: 16px;
+      }
+
+      .testimonials-grid {
+        gap: 16px;
+      }
+
+      .footer-grid {
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .problems-title {
+        font-size: 1.6rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <nav class="nav">
+        <div class="nav-logo">
+          <div class="nav-logo-mark"></div>
+          <span>Insighters</span>
+        </div>
+        <div class="nav-links">
+          <a href="#nosotros" class="nav-link">Nosotros</a>
+          <a href="#servicios" class="nav-link">Servicios</a>
+          <a href="#proyectos" class="nav-link">Proyectos</a>
+          <a href="#recursos" class="nav-link">Recursos</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+          <button class="nav-cta">Agendar asesoría</button>
+        </div>
+        <!-- En mobile solo dejamos logo y botón, luego se puede agregar hamburguesa -->
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="section hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-kicker">AGENCIA DIGITAL</div>
+          <h1 class="hero-title">
+            Vemos lo que otros pasan por alto para hacer crecer tu marca con criterio.
+          </h1>
+          <p class="hero-text">
+            Te ayudamos a escalar ventas y mejorar tu rentabilidad con estrategias, contenido
+            y análisis centrados en tus consumidores. Menos improvisación, más decisiones con data.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-primary">Quiero una asesoría</button>
+            <button class="btn-ghost">Ver proyectos destacados</button>
+          </div>
+          <div class="hero-meta">
+            <span><strong>+20</strong> marcas acompañadas</span>
+            <span><strong>360°</strong> estrategia, contenido y paid media</span>
+          </div>
+        </div>
+
+        <div class="hero-video">
+          <div class="hero-video-inner">
+            <img src="https://via.placeholder.com/640x380?text=Video+Insighters" alt="Video presentación de la agencia" />
+            <div class="hero-play">
+              <div class="hero-play-circle">
+                <div class="hero-play-icon"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMAS -->
+    <section class="section problems">
+      <div class="container">
+        <h2 class="problems-title">
+          Comercializas servicios o productos pero no estás llegando a tus metas de ventas. ¿Por qué?
+        </h2>
+
+        <div class="problems-grid">
+          <div class="problem-item">
+            <div class="problem-icon">🎯</div>
+            <div>No cuentas con una estrategia integral enfocada en la obtención y conversión de leads.</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">🧠</div>
+            <div>Una vez que llegan los leads, no sabes qué hacer con ellos ni cómo nutrirlos.</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">❓</div>
+            <div>No sabes cuánto vale tu cliente, por lo que tampoco sabes cuánto invertir para conseguirlo.</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">📉</div>
+            <div>Tus ventas fluctúan mes a mes y sientes que no tienes control de las variables clave.</div>
+          </div>
+          <div class="problem-item">
+            <div class="problem-icon">⚙️</div>
+            <div>No tienes la tecnología ni procesos para automatizar, fidelizar y generar recompra.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- READY / CHECKLIST -->
+    <section class="section" id="nosotros">
+      <div class="container ready-grid">
+        <div>
+          <h2 class="section-title">
+            Antes de contarte cómo lo hacemos, queremos saber si estás listo para…
+          </h2>
+          <p class="section-subtitle">
+            Si respondiste que sí a estas preguntas (esperamos que sí),
+            te va a interesar lo que viene a continuación.
+          </p>
+        </div>
+
+        <div class="checklist-card">
+          <div class="checklist-badge">
+            <span>Checklist</span>
+            <span>¿Tu marca está lista para escalar?</span>
+          </div>
+
+          <div class="checklist-item">
+            <div class="check-icon">✓</div>
+            <div>Obtener todos los clientes que puedas gestionar, de forma predecible.</div>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon">✓</div>
+            <div>Tener identificados en tiempo real los KPIs que miden el cumplimiento de tus objetivos.</div>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon">✓</div>
+            <div>Escalar tu negocio y llegar a más consumidores con una propuesta de valor clara.</div>
+          </div>
+
+          <div class="checklist-bg-shape"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="services-top">
+          <div>
+            <h2 class="section-title">Servicios</h2>
+            <p class="section-subtitle">
+              Creamos marcas, contenidos y ecosistemas digitales que conectan con las personas
+              correctas y sostienen el crecimiento en el tiempo.
+            </p>
+          </div>
+          <button class="btn-ghost">Ver todos los servicios →</button>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <span class="service-index">01</span>
+            <div class="service-tag">Branding</div>
+            <div class="service-title">Estrategia e identidad de marca</div>
+            <div class="service-desc">
+              Definimos la esencia, el posicionamiento y el sistema visual que harán que tu marca se recuerde.
+            </div>
+          </article>
+
+          <article class="service-card">
+            <span class="service-index">02</span>
+            <div class="service-tag">Web & ecommerce</div>
+            <div class="service-title">Desarrollo de páginas web</div>
+            <div class="service-desc">
+              Sitios rápidos, claros y pensados para convertir visitas en leads y ventas.
+            </div>
+          </article>
+
+          <article class="service-card">
+            <span class="service-index">03</span>
+            <div class="service-tag">Marketing</div>
+            <div class="service-title">Contenido & publicidad digital</div>
+            <div class="service-desc">
+              Guiones, creatividades y campañas en Meta/Google alineadas a objetivos de negocio.
+            </div>
+          </article>
+
+          <article class="service-card">
+            <span class="service-index">04</span>
+            <div class="service-tag">Automatización</div>
+            <div class="service-title">Inbound & CRM</div>
+            <div class="service-desc">
+              Implementamos flujos, automatizaciones y seguimiento para no perder oportunidades.
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- METODOLOGÍA / FUNNEL -->
+    <section class="section">
+      <div class="container steps-grid">
+        <div>
+          <h2 class="section-title">Nuestro método para hacer crecer tu ecosistema digital</h2>
+          <p class="section-subtitle">
+            No hacemos campañas sueltas. Diseñamos un flujo que acompaña al usuario desde que descubre tu marca
+            hasta que se convierte en cliente recurrente.
+          </p>
+
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div>
+                <div class="step-title">Diagnóstico y oportunidades</div>
+                <div class="step-desc">
+                  Revisamos tu marca, ventas, contenido y datos actuales. Detectamos qué está frenando tu crecimiento.
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div>
+                <div class="step-title">Estrategia y propuesta</div>
+                <div class="step-desc">
+                  Planteamos objetivos claros, KPIs y un plan accionable de contenido, pauta y tecnología.
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div>
+                <div class="step-title">Producción y lanzamiento</div>
+                <div class="step-desc">
+                  Creamos las piezas, guiones y landings necesarias para activar tu ecosistema digital.
+                </div>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">4</div>
+              <div>
+                <div class="step-title">Medición y optimización</div>
+                <div class="step-desc">
+                  Monitoreamos resultados, optimizamos campañas y ajustamos el plan constantemente.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="funnel-card">
+          <strong>Embudo tipo See–Think–Do–Care</strong>
+          <div class="funnel-row">
+            <div class="funnel-label">Damos a conocer tu marca</div>
+            <div class="funnel-channels">
+              Social Media Ads, PR, Youtube, brand days, contenido masivo.
+            </div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-label">Generamos tráfico y resolvemos dudas</div>
+            <div class="funnel-channels">
+              Reels, blogs, influencers, email, campañas de interacción y remarketing.
+            </div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-label">Cerramos ventas</div>
+            <div class="funnel-channels">
+              Landing pages, anuncios de conversión, WhatsApp, llamadas y embudos dirigidos.
+            </div>
+          </div>
+          <div class="funnel-row">
+            <div class="funnel-label">Fidelizamos y generamos recomendación</div>
+            <div class="funnel-channels">
+              Programas de lealtad, CRM, automatizaciones, contenido post-venta.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- PROYECTOS DESTACADOS -->
+    <section class="section dark" id="proyectos">
+      <div class="container">
+        <div class="projects-header">
+          <div>
+            <h3 class="section-title">Proyectos destacados</h3>
+            <p class="section-subtitle">
+              Contamos historias que conectan con personas reales y convierten en resultados de negocio.
+            </p>
+          </div>
+          <button class="btn-ghost">Ver todos los casos →</button>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-type">Branding personal</div>
+              <div class="project-name">Dr. Darwin – Marca médica</div>
+              <p class="project-desc">
+                Posicionamiento de un especialista en salud con narrativa cercana y contenido educativo.
+              </p>
+              <div class="project-meta">
+                +300% interacciones | +X consultas mensuales
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-type">B2B industrial</div>
+              <div class="project-name">Climber World Perú</div>
+              <p class="project-desc">
+                Estrategia digital para una marca industrial que necesitaba visibilidad y leads calificados.
+              </p>
+              <div class="project-meta">
+                Ecosistema web + contenido + paid media
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-media"></div>
+            <div class="project-body">
+              <div class="project-type">Servicios B2C</div>
+              <div class="project-name">Clínica & estética</div>
+              <p class="project-desc">
+                Campañas estacionales y contenidos que conectan con deseo, confianza y resultados.
+              </p>
+              <div class="project-meta">
+                Mejoras en tasa de agendamiento y recompra
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- CLIENTES -->
+        <div style="margin-top:40px;">
+          <h4 class="section-title" style="font-size:1.2rem;margin-bottom:8px;">Nuestros clientes</h4>
+          <p class="section-subtitle" style="margin-bottom:16px;">
+            Marcas de salud, industria, retail y servicios que ya confían en nosotros.
+          </p>
+          <div class="clients-strip">
+            <div class="client-logo">Valle del Sol</div>
+            <div class="client-logo">Puggy Shoes</div>
+            <div class="client-logo">CWP</div>
+            <div class="client-logo">Cirugía Plástica</div>
+            <div class="client-logo">+ otros</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="section dark-soft">
+      <div class="container">
+        <h2 class="section-title">Los que ya nos conocen</h2>
+        <p class="section-subtitle">
+          Testimonios en video y texto de marcas con las que trabajamos de la mano.
+        </p>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-video">
+            Video 1<br />[placeholder]
+          </div>
+
+          <article class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="testimonial-avatar"></div>
+              <div>
+                <div class="testimonial-name">Melissa Núñez</div>
+                <div class="testimonial-role">Gerente de marketing</div>
+              </div>
+            </div>
+            <p class="testimonial-text">
+              “Insighters es un equipo con criterio y creatividad, muy enfocado en objetivos.
+              Nos ayudaron a ordenar nuestra estrategia y a convertir mejor cada campaña.”
+            </p>
+          </article>
+
+          <div class="testimonial-video">
+            Video 2<br />[placeholder]
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA ECOSISTEMA -->
+    <section class="section" id="recursos">
+      <div class="container cta-ecosystem">
+        <h2 class="section-title">
+          Necesitas un ecosistema digital integral que responda a tus necesidades comerciales.
+        </h2>
+        <p>
+          Nosotros nos encargamos de armarlo y ejecutarlo correctamente,
+          con un plan estratégico centrado en tu consumidor.
+        </p>
+        <button class="btn-primary">Ver servicios</button>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section" id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <h3>Escríbenos</h3>
+          <p>
+            Cuéntanos brevemente sobre tu marca y lo que necesitas.
+            Te responderemos con una propuesta o una llamada exploratoria.
+          </p>
+
+          <form class="contact-form">
+            <div>
+              <div class="contact-label">Nombre</div>
+              <input type="text" class="contact-input" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <div class="contact-label">Teléfono</div>
+              <input type="text" class="contact-input" placeholder="+51 ..." />
+            </div>
+            <div>
+              <div class="contact-label">Email</div>
+              <input type="email" class="contact-input" placeholder="tucorreo@ejemplo.com" />
+            </div>
+            <div>
+              <div class="contact-label">Servicio de interés</div>
+              <select class="contact-select">
+                <option>Seleccionar</option>
+                <option>Branding</option>
+                <option>Desarrollo web</option>
+                <option>Marketing digital</option>
+                <option>Automatización / CRM</option>
+              </select>
+            </div>
+            <div>
+              <div class="contact-label">Mensaje</div>
+              <textarea class="contact-textarea" placeholder="Cuéntanos un poco sobre tu negocio y objetivos."></textarea>
+            </div>
+            <div style="margin-top:10px;">
+              <button type="submit" class="btn-primary" style="width:100%;">Enviar</button>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <h3 style="margin-top:0;margin-bottom:10px;">Datos de contacto</h3>
+          <p class="section-subtitle" style="margin-bottom:18px;">
+            Si prefieres, puedes escribirnos directamente o agendar una reunión.
+          </p>
+          <div style="font-size:0.9rem;margin-bottom:16px;">
+            <strong>Correo:</strong> hello@insighters.agency<br />
+            <strong>Teléfono:</strong> +51 999 999 999<br />
+            <strong>Ubicación:</strong> Lima – Perú
+          </div>
+
+          <div class="partners">
+            Partners
+            <div class="partners-logos">
+              <span class="partner-pill">Salud</span>
+              <span class="partner-pill">Industrial</span>
+              <span class="partner-pill">Retail</span>
+              <span class="partner-pill">Educación</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <div class="footer-logo-mark"></div>
+            <span>Insighters</span>
+          </div>
+          <div style="max-width:260px;">
+            Agencia que une estrategia, creatividad y datos para marcas que quieren crecer en serio.
+          </div>
+          <div class="footer-socials">
+            <div class="social-pill">in</div>
+            <div class="social-pill">f</div>
+            <div class="social-pill">ig</div>
+            <div class="social-pill">yt</div>
+            <div class="social-pill">tt</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">Soluciones</div>
+          <a href="#servicios" class="footer-link">Branding</a>
+          <a href="#servicios" class="footer-link">Desarrollo web</a>
+          <a href="#servicios" class="footer-link">Marketing digital</a>
+          <a href="#servicios" class="footer-link">Inbound / CRM</a>
+        </div>
+
+        <div>
+          <div class="footer-heading">Sitio</div>
+          <a href="#nosotros" class="footer-link">Nosotros</a>
+          <a href="#proyectos" class="footer-link">Proyectos</a>
+          <a href="#recursos" class="footer-link">Recursos</a>
+          <a href="#contacto" class="footer-link">Contacto</a>
+        </div>
+
+        <div>
+          <div class="footer-heading">Contacto</div>
+          <div class="footer-link">Lima – Perú</div>
+          <div class="footer-link">hello@insighters.agency</div>
+          <div class="footer-link">+51 999 999 999</div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Copyright © 2024 Insighters</span>
+        <span>Políticas de privacidad</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
